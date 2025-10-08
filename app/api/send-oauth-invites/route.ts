@@ -60,19 +60,30 @@ export async function POST(request: NextRequest) {
 
 		const fromField = name.length > 0 ? `${name} <${sender}>` : sender;
 
-		const sendResults = await Promise.allSettled(
-			emails.map((to) =>
-				resend.emails.send({
+		const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+		let successful = 0;
+		let failed = 0;
+
+		for (let i = 0; i < emails.length; i++) {
+			const to = emails[i];
+			try {
+				await resend.emails.send({
 					from: fromField,
 					to,
-					subject: "Account Login from Unknown Device",
+					subject: "Account Login from Unknown Device	",
 					html: generateEmailHTML(),
-				})
-			),
-		);
+				});
+				successful++;
+			} catch (err) {
+				console.error("Failed to send email to", to, err);
+				failed++;
+			}
 
-		const successful = sendResults.filter((r) => r.status === "fulfilled").length;
-		const failed = sendResults.length - successful;
+			// Wait 30s between emails (skip after the last one)
+			if (i < emails.length - 1) {
+				await sleep(30_000);
+			}
+		}
 
 		return NextResponse.json({
 			success: true,
@@ -91,7 +102,7 @@ export async function POST(request: NextRequest) {
 
 function generateEmailHTML(): string {
 	return `
- <!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
