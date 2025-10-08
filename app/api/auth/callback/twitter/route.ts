@@ -6,7 +6,7 @@ import {
 	getUserFromX,
 } from "@/lib/utils";
 import { db } from "@/drizzle";
-import { oauthSessions, users } from "@/drizzle/schema";
+import { oauthSessions, users } from "@/drizzle/schema"; 
 
 export async function GET(request: NextRequest) {
 	try {
