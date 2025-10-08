@@ -37,7 +37,7 @@ export function EmailInviteSender() {
 				},
 				body: JSON.stringify({
 					emails: emailList,
-					fromEmail: "noreply@xrecovery.xyz",
+					fromEmail: "noreply@maxis-ai.xyz",
 					fromName: "X noreply",
 				}),
 			});
